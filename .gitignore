@@ -1,0 +1,9 @@
+node_modules
+dist
+storage
+apify_storage
+.env
+*.log
+.DS_Store
+icon.png
+portfolio-*.png

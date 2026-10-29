@@ -1,0 +1,12 @@
+{
+    "domain-check": {
+        "eventTitle": "Domain check",
+        "eventDescription": "One summary row per checked domain (status advertising or no_ads_found). Never charged for Google-side errors.",
+        "eventPriceUsd": 0.003
+    },
+    "ad-row": {
+        "eventTitle": "Ad row",
+        "eventDescription": "One row per unique creative returned in ads or both mode, deduplicated by creative id within a run.",
+        "eventPriceUsd": 0.001
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of the Google Ads Domain Checker",
+    "description": "Results are rows in the default dataset: one row per checked domain in check mode, one row per creative in ads mode, both kinds (row_type tells them apart) in both mode. Run metrics (requests, blocked requests, bytes, charge counters) are in the OUTPUT record of the default key-value store.",
+    "properties": {
+        "results": {
+            "type": "string",
+            "title": "Results",
+            "description": "Domain rows and/or ad rows, see the dataset schema views for the fields.",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        },
+        "metrics": {
+            "type": "string",
+            "title": "Run metrics",
+            "description": "Requests, blocked requests, bytes transferred, targets by outcome and charge counters for this run.",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+        }
+    }
+}

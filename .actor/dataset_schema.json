@@ -1,0 +1,82 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "domains": {
+            "title": "Domain checks",
+            "description": "One row per checked domain (check and both modes).",
+            "transformation": {
+                "fields": [
+                    "domain",
+                    "status",
+                    "is_advertising_now",
+                    "advertiser_name",
+                    "advertiser_id",
+                    "ad_count_low",
+                    "ad_count_high",
+                    "last_seen",
+                    "days_since_last_ad",
+                    "longest_running_days",
+                    "transparency_url",
+                    "checked_at",
+                    "row_type"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "domain": { "label": "Domain", "format": "text" },
+                    "status": { "label": "Status", "format": "text" },
+                    "is_advertising_now": { "label": "Advertising now", "format": "boolean" },
+                    "advertiser_name": { "label": "Advertiser", "format": "text" },
+                    "advertiser_id": { "label": "Advertiser ID", "format": "text" },
+                    "ad_count_low": { "label": "Ads (low)", "format": "number" },
+                    "ad_count_high": { "label": "Ads (high)", "format": "number" },
+                    "last_seen": { "label": "Last seen", "format": "text" },
+                    "days_since_last_ad": { "label": "Days since last ad", "format": "number" },
+                    "longest_running_days": { "label": "Longest running (days)", "format": "number" },
+                    "transparency_url": { "label": "Transparency Center", "format": "link" },
+                    "checked_at": { "label": "Checked at", "format": "date" },
+                    "row_type": { "label": "Row type", "format": "text" }
+                }
+            }
+        },
+        "ads": {
+            "title": "Ad rows",
+            "description": "One row per creative (ads and both modes).",
+            "transformation": {
+                "fields": [
+                    "domain",
+                    "advertiser_name",
+                    "creative_id",
+                    "format",
+                    "first_shown",
+                    "last_shown",
+                    "days_shown",
+                    "is_active_now",
+                    "change_status",
+                    "preview_url",
+                    "transparency_url",
+                    "row_type"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "domain": { "label": "Domain", "format": "text" },
+                    "advertiser_name": { "label": "Advertiser", "format": "text" },
+                    "creative_id": { "label": "Creative ID", "format": "text" },
+                    "format": { "label": "Format", "format": "text" },
+                    "first_shown": { "label": "First shown", "format": "text" },
+                    "last_shown": { "label": "Last shown", "format": "text" },
+                    "days_shown": { "label": "Days shown", "format": "number" },
+                    "is_active_now": { "label": "Active now", "format": "boolean" },
+                    "change_status": { "label": "Change", "format": "text" },
+                    "preview_url": { "label": "Preview", "format": "link" },
+                    "transparency_url": { "label": "Transparency Center", "format": "link" },
+                    "row_type": { "label": "Row type", "format": "text" }
+                }
+            }
+        }
+    }
+}

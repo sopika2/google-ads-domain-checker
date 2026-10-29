@@ -1,0 +1,105 @@
+{
+    "title": "Google Ads Domain Checker input",
+    "description": "Check a list of domains against the Google Ads Transparency Center. Every field has a working default; the prefilled domains run in under a minute.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "domains": {
+            "title": "Domains",
+            "type": "array",
+            "description": "Domains to check, one per line. Full URLs are accepted: the scheme, the www. prefix, the path and the query are stripped, the host is lower-cased and duplicates are removed. Soft cap 10,000 per run.",
+            "editor": "stringList",
+            "prefill": ["nike.com", "booking.com", "shopify.com"]
+        },
+        "advertiserIds": {
+            "title": "Advertiser IDs (experimental)",
+            "type": "array",
+            "description": "Optional Google advertiser IDs (AR followed by digits), one per line, checked in addition to the domains. Each ID is its own target: its rows carry the ID in the domain field and the advertiser id and name from Google. Verified working anonymously on 2026-10-28, but flagged experimental because one vendor reported HTTP 400 on this filter.",
+            "editor": "stringList",
+            "default": []
+        },
+        "mode": {
+            "title": "Mode",
+            "type": "string",
+            "description": "check = one summary row per domain (event domain-check). ads = one row per creative (event ad-row). both = both row types in the same dataset; the row_type field tells them apart.",
+            "editor": "select",
+            "enum": ["check", "ads", "both"],
+            "enumTitles": ["check: one row per domain", "ads: one row per creative", "both"],
+            "default": "check"
+        },
+        "region": {
+            "title": "Region",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code (for example US, GB, DE, HU) to restrict results to ads shown in that country, or anywhere for no restriction. Ad counts and samples differ by region.",
+            "editor": "textfield",
+            "default": "anywhere",
+            "pattern": "^([A-Za-z]{2}|anywhere)$"
+        },
+        "sampleSize": {
+            "title": "Sample size (check mode)",
+            "type": "integer",
+            "description": "Number of most-recent creatives read per domain in check mode to derive last_seen, formats, the longest-running ad and change detection. 100 creatives = 1 request. Google returns creatives ordered by last-shown date descending, so last_seen is exact even for small samples.",
+            "default": 100,
+            "minimum": 20,
+            "maximum": 500,
+            "unit": "creatives"
+        },
+        "maxAdsPerDomain": {
+            "title": "Max ads per domain (ads mode)",
+            "type": "integer",
+            "description": "Pagination cap per domain in ads and both modes, 100 creatives per request. Some vendors report Google stopping around 1,000 creatives per query; split by region if you hit it.",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 5000,
+            "unit": "creatives"
+        },
+        "activeWindowDays": {
+            "title": "Active window (days)",
+            "type": "integer",
+            "description": "A creative or advertiser counts as active now when its last-shown date is within this many days of the run.",
+            "default": 7,
+            "minimum": 1,
+            "maximum": 400,
+            "unit": "days"
+        },
+        "trackChanges": {
+            "title": "Track changes between runs",
+            "type": "boolean",
+            "description": "Remember the creatives seen per domain in a named key-value store and report new and ended creatives on the next run. Free. Combine with a Schedule for monitoring.",
+            "default": false
+        },
+        "stateStoreName": {
+            "title": "State store name",
+            "type": "string",
+            "description": "Name of the key-value store that holds the per-domain creative snapshot used by change tracking (3-63 letters, digits or hyphens, not starting or ending with a hyphen). Use a different name per monitoring list; snapshots are kept per region automatically.",
+            "editor": "textfield",
+            "default": "google-ads-domain-check-state",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+        },
+        "proxyConfiguration": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "Google rate-limits datacenter IPs quickly (HTTP 429, then a reCAPTCHA redirect), so Apify RESIDENTIAL proxies are the default. Switch to datacenter at your own risk: blocked domains are reported with status error and are never charged.",
+            "editor": "proxy",
+            "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+            "default": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] }
+        },
+        "requestDelayMs": {
+            "title": "Delay between requests per session (ms)",
+            "type": "integer",
+            "description": "Minimum pause between two requests on the same proxy session. 1,000 ms (one request per second per IP) is the known-safe rate.",
+            "default": 1000,
+            "minimum": 250,
+            "maximum": 10000,
+            "unit": "ms"
+        },
+        "maxConcurrency": {
+            "title": "Parallel sessions",
+            "type": "integer",
+            "description": "How many targets are fetched at the same time, each on its own proxy session. 4 is the known-safe default; higher values risk a pool-wide block.",
+            "default": 4,
+            "minimum": 1,
+            "maximum": 8
+        }
+    }
+}

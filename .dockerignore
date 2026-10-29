@@ -1,0 +1,10 @@
+node_modules
+dist
+storage
+apify_storage
+test
+scripts
+.git
+.env
+*.log
+HANDOVER.md
