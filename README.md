@@ -2,6 +2,8 @@
 
 Check any list of domains for live Google Ads and get one flat row per domain: the advertiser behind the domain, Google's ad-count range, the date an ad was last shown, how many days the longest ad has been running, the text / image / video mix and, between scheduled runs, which ads are new and which have ended. The data comes from Google's public Ads Transparency Center over plain HTTP: no browser, no login, no cookies. Pricing is pay-per-event, $3 per 1,000 domains checked and $1 per 1,000 ad rows, no start fee, and nothing is charged for a domain that Google blocked or that errored.
 
+Live on the [Apify Store](https://apify.com/saekoto/google-ads-domain-check). Source on [GitHub](https://github.com/sopika2/google-ads-domain-checker), MIT licensed.
+
 Three things set this actor apart from the ad-dump tools in the Store:
 
 - **A bulk domain-list check priced per domain.** One flat row per domain with `is_advertising_now`, `last_seen`, `days_since_last_ad`, `longest_running_days`, the ad-count range, the format mix and a Transparency Center link. A domain with no ads is a result too (`status: "no_ads_found"`).
@@ -250,7 +252,7 @@ Every run writes an `OUTPUT` record to its default key-value store with the requ
 
 ## Support
 
-Issues reported in this actor's **Issues** tab on the Apify Store are answered within 24 hours. Include the run ID and, if the problem is specific to a target, one example domain. When Google changes the Transparency Center, the actor is updated and the change is noted in the changelog.
+Issues reported in this actor's **Issues** tab on the [Apify Store](https://apify.com/saekoto/google-ads-domain-check), or on [GitHub](https://github.com/sopika2/google-ads-domain-checker/issues), are answered within 24 hours. The full source is on GitHub under the MIT license. Include the run ID and, if the problem is specific to a target, one example domain. When Google changes the Transparency Center, the actor is updated and the change is noted in the changelog.
 
 ## Legal and fair use
 
